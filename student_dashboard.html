@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Student Dashboard</h2>
+  <div class="card-row">
+    <div class="card profile">
+      <h3>Profile</h3>
+      <p><strong>Name:</strong> {{ student.full_name }}</p>
+      <p><strong>Roll:</strong> {{ student.roll_number }}</p>
+      <p><strong>Department:</strong> {{ student.department.name if student.department }}</p>
+    </div>
+
+    <div class="card">
+      <h3>View My Result</h3>
+      <form action="{{ url_for('student_view_result', user_id=student.user_id) }}" method="POST">
+        <label>Select Semester</label>
+        <select name="semester" required>
+          {% for s in semesters %}
+            <option value="{{ s.id }}">{{ s.name }}</option>
+          {% endfor %}
+        </select>
+        <button type="submit">View</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

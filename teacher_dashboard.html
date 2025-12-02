@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Teacher Dashboard — {{ teacher.full_name }}</h2>
+  <div class="card-list">
+    {% for c in courses %}
+      <div class="card">
+        <h3>{{ c.code }} — {{ c.title }}</h3>
+        <p><a href="{{ url_for('teacher_course_update', user_id=teacher.user_id, course_id=c.id) }}">Manage Results</a></p>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

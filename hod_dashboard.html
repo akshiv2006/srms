@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>HOD Dashboard — {{ hod.full_name }}</h2>
+  <div class="card">
+    <h3>View Department Results</h3>
+    <form method="POST">
+      <label>Department</label>
+      <select name="department">
+        {% for d in departments %}<option value="{{ d.id }}">{{ d.name }}</option>{% endfor %}
+      </select>
+      <label>Semester</label>
+      <select name="semester">
+        {% for s in semesters %}<option value="{{ s.id }}">{{ s.name }}</option>{% endfor %}
+      </select>
+      <button type="submit">View</button>
+    </form>
+  </div>
+{% endblock %}

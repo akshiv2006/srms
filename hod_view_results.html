@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Results — {{ department.name }} — {{ semester.name }}</h2>
+  {% if results %}
+    <table class="table">
+      <thead><tr><th>Student</th><th>Roll</th><th>Course</th><th>Marks</th><th>Grade</th></tr></thead>
+      <tbody>
+        {% for r in results %}
+          <tr>
+            <td>{{ r.student.full_name }}</td>
+            <td>{{ r.student.roll_number }}</td>
+            <td>{{ r.course.code }} - {{ r.course.title }}</td>
+            <td>{{ r.marks }}</td>
+            <td>{{ r.grade }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No results found.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Manage Results — {{ course.code }} {{ course.title }}</h2>
+
+  <div class="card">
+    <h3>Enter / Update Result</h3>
+    <form method="POST">
+      <label>Semester</label>
+      <select name="semester" required>
+        {% for s in semesters %}<option value="{{ s.id }}">{{ s.name }}</option>{% endfor %}
+      </select>
+      <label>Student Roll Number</label>
+      <input name="roll_number" required />
+      <label>Marks</label>
+      <input name="marks" type="number" step="0.01" required />
+      <button type="submit">Save</button>
+    </form>
+  </div>
+
+  <h3>All Results for this Course</h3>
+  {% if results %}
+    <table class="table">
+      <thead><tr><th>Student</th><th>Semester</th><th>Marks</th><th>Grade</th></tr></thead>
+      <tbody>
+        {% for r in results %}
+          <tr>
+            <td>{{ r.student.full_name }} ({{ r.student.roll_number }})</td>
+            <td>{{ r.semester.name }}</td>
+            <td>{{ r.marks }}</td>
+            <td>{{ r.grade }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No results yet.</p>
+  {% endif %}
+{% endblock %}

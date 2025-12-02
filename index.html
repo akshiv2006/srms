@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+  <section class="hero small">
+    <h1>Student Result Management System</h1>
+    <p>Choose your role to continue</p>
+    <div class="role-cards">
+     {%if current_user.is_authenticated and current_user.role=='student' %} 
+
+      <a class="card" href="{{url_for('student_dashboard',user_id=current_user.id)}}"> 
+        <h3>Student</h3>
+        <p>View profile & results</p>
+      </a>
+     {%else%}
+     <a class="card" href="{{url_for('select_role', role='student')}}">
+      <h3>Student</h3>
+      <p>Login to view your dashboard</p>
+     </a> 
+     {% endif %}
+    
+
+ {% if current_user.is_authenticated and current_user.role=='teacher' %}
+      <a class="card" href="{{url_for('teacher_dashboard',user_id=current_user.id)}}">
+        <h3>Teacher</h3>
+        <p>Upload / modify results</p>
+      </a>
+      {%else%}
+      <a class="card" href="{{url_for('select_role',role='teacher')}}">
+        <h3>Teacher</h3>
+        <p>Login as teacher</p>
+      </a>
+      {%endif%}
+
+      {% if current_user.is_authenticated and current_user.role=='hod'  %}
+      <a class="card" href="{{url_for('hod_dashboard',user_id=current_user.id)}}">
+        <h3>HOD</h3>
+        <p>Department results overview</p>
+      </a>
+      {%else%}
+      <a class="card" href="{{url_for('select_role',role='hod')}}">
+        <h3>HOD</h3>
+        <p>Login as HOD</p>
+      </a>
+      {%endif%}
+
+    </div>
+  </section>
+{% endblock %}
